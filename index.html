@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NOIR SOCIETY</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div class="promo-bar">
+  <div class="promo-track">
+    <span><i class="fa-solid fa-truck"></i> Free delivery on orders above ₦50,000</span>
+    <span>🔥 New drop just landed — limited stock</span>
+    <span>⚡ 10% off first purchase</span>
+  </div>
+</div>
+  <!-- HEADER -->
+ <header class="header">
+
+  <div class="logo"><img src="images/Black_and_Beige_Modern_Typographic_Simple_Echo_Clothing_Logo-removebg-preview.png" alt=""></div>
+
+  <div class="header-divider"></div>
+
+  <nav class="nav" id="nav-links">
+    <a href="index.html">Home</a>
+    <a href="products.html">Shop</a>
+    <a href="#">About</a>
+  </nav>
+
+  <div class="header-icons">
+
+    <div class="cart-icon" id="cart-btn">
+      <i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span>
+    </div>
+
+    <div class="burger" id="burger">
+      ☰
+    </div>
+
+  </div>
+
+</header>
+<div class="mobile-menu" id="mobile-menu">
+
+  <div class="mobile-menu-header">
+    <div class="logo">NOIR SOCIETY</div>
+
+    <div class="close-menu" id="close-menu"><</div>
+  </div>
+
+  <div class="mobile-links">
+    <a href="index.html">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">About</a>
+  </div>
+
+</div>
+
+  <!-- HERO SECTION -->
+<section class="hero">
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+
+    <span class="hero-tag">
+      LIMITED DROP • PREMIUM STREETWEAR
+    </span>
+
+   <h1>
+  Built For The Ones
+  <span class="image-text">Who Move Different.</span>
+</h1>
+
+    <p>
+      Premium garments crafted in limited quantities.
+      Designed to stand apart, not blend in.
+    </p>
+
+    <div class="hero-actions">
+      <a href="products.html"><button class="shop-btn">
+        Shop Collection
+      </button></a>
+
+      <button class="secondary-btn">
+        View Lookbook
+      </button>
+
+      <div class="hero-glow"></div>
+
+<div class="floating-card card-1">
+  LIMITED DROP
+</div>
+
+<div class="floating-card card-2">
+  EST. 2026
+</div>
+
+<div class="hero-line"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+  <!-- FEATURED SECTION -->
+  <section class="featured">
+
+    <h2>Featured Pieces</h2>
+
+    <div class="products" id="products"></div>
+    <div>
+      <button class="shop-btn" onclick="goToProducts()">
+      View All Products
+    </button></div>
+
+  </section>
+  
+
+<section class="drop-banner">
+  <div class="drop-bg"></div>
+
+  <div class="drop-overlay">
+    <p class="drop-tag">LIMITED DROP</p>
+
+    <h2>
+      BUILT FOR THE ONES<br />
+      WHO MOVE DIFFERENT
+    </h2>
+
+    <button class="shop-btn">Explore Collection</button>
+  </div>
+</section>
+
+<section class="editorial">
+
+  <div class="editorial-image">
+    <img
+      src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1200"
+      alt=""
+    />
+  </div>
+
+  <div class="editorial-content">
+
+    <p class="editorial-tag">
+      NEW SEASON
+    </p>
+
+    <h2>
+      Minimal Pieces.
+      Maximum Presence.
+    </h2>
+
+    <p class="editorial-text">
+      Designed for movement, layered silhouettes,
+      and everyday dominance.
+    </p>
+
+    <a href="products.html"><button class="shop-btn">
+      Shop Now
+    </button></a>
+
+  </div>
+
+</section>
+
+  <div id="cart-drawer" class="cart-drawer">
+<button id="close-cart" class="close-cart">×</button>
+  <h2>Your Cart</h2>
+  
+  <div id="cart-items"></div>
+
+  <div class="cart-footer">
+    <h3 id="cart-total">$0</h3>
+    <button class="shop-btn2" onclick="goToCheckout()">
+        Checkout
+    </button>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">
+  Product added to cart
+</div>
+
+<footer class="footer">
+
+  <div class="footer-container">
+
+    <!-- BRAND -->
+    <div class="footer-brand">
+      <h2 class="logo"><img src="images/Black_and_Beige_Modern_Typographic_Simple_Echo_Clothing_Logo-removebg-preview.png" alt=""></h2>
+      <p>Minimal fashion. Maximum presence.</p>
+    </div>
+
+    <!-- LINKS -->
+    <div class="footer-links">
+      <h3>Shop</h3>
+      <a href="products.html">All Products</a>
+      <a href="#">New Arrivals</a>
+      <a href="#">Best Sellers</a>
+    </div>
+
+    <div class="footer-links">
+      <h3>Company</h3>
+      <a href="#">About Us</a>
+      <a href="#">Contact</a>
+      <a href="#">Shipping</a>
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="footer-social">
+      <h3>Follow Us</h3>
+
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 NOIR SOCIETY. All rights reserved.</p>
+  </div>
+
+</footer>
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script src="main.js"></script>
+  
+
+</body>
+</html>

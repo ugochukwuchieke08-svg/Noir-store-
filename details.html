@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Product</title>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="header">
+
+  <div class="logo"><img src="images/Black_and_Beige_Modern_Typographic_Simple_Echo_Clothing_Logo-removebg-preview.png" alt=""></div>
+
+  <div class="header-divider"></div>
+
+  <nav class="nav" id="nav-links">
+    <a href="index.html">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">About</a>
+  </nav>
+
+  <div class="header-icons">
+
+    <div class="cart-icon" id="cart-btn">
+      <i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">0</span>
+    </div>
+
+    <div class="burger" id="burger">
+      ☰
+    </div>
+
+  </div>
+
+</header>
+<div class="mobile-menu" id="mobile-menu">
+
+  <div class="mobile-menu-header">
+    <div class="logo">NOIR SOCIETY</div>
+
+    <div class="close-menu" id="close-menu"><</div>
+  </div>
+
+  <div class="mobile-links">
+    <a href="index.html">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">About</a>
+  </div>
+
+</div>
+
+
+  <section class="product-page">
+
+   <div class="product-image">
+
+  <img id="product-image" src="" />
+
+  <div class="thumbnail-container"
+       id="thumbnail-container">
+  </div>
+
+</div>
+
+    <div class="product-details">
+
+      <h1 id="product-name"></h1>
+
+      <p class="product-price" id="product-price"></p>
+
+      <p class="product-description">
+        Premium heavyweight streetwear designed for everyday dominance.
+      </p>
+
+      <ul class="product-benefits">
+        <li>Heavyweight cotton</li>
+        <li>Oversized fit</li>
+        <li>Limited drop</li>
+      </ul>
+
+      <div class="size-section">
+
+  <p>Select Size</p>
+
+  <div class="sizes">
+
+    <button class="size-btn">S</button>
+    <button class="size-btn">M</button>
+    <button class="size-btn">L</button>
+    <button class="size-btn">XL</button>
+
+  </div>
+
+</div>
+
+      <button id="add-to-cart" class="shop-btn">
+        Add To Cart
+      </button>
+      <div class="toast" id="toast">
+        Product added to cart
+      </div>
+
+    </div>
+    
+  </section>
+
+   <div id="cart-drawer" class="cart-drawer">
+<button id="close-cart" class="close-cart">×</button>
+  <h2>Your Cart</h2>
+  
+  <div id="cart-items"></div>
+
+  <div class="cart-footer">
+    <h3 id="cart-total">$0</h3>
+    <button class="shop-btn2" onclick="goToCheckout()">
+        Checkout
+    </button>
+  </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+ <script src="main.js"></script>
+   
+
+  
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<form id="product-form">
+  <input
+    type="text"
+    id="name"
+    placeholder="Product Name"
+    required
+  >
+
+  <input
+    type="number"
+    id="price"
+    placeholder="Price"
+    required
+  >
+
+  <input
+    type="text"
+    id="badge"
+    placeholder="Badge"
+  >
+
+ <input
+  type="file"
+  id="image"
+  multiple
+  accept="image/*"
+/>
+
+<input type="number" id="rating" min="0" max="5" step="0.1" placeholder="Product rating (0-5)">
+
+  <button type="submit">
+    Upload Product
+  </button>
+</form>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="main.js"></script>
+   <script src="product.js"></script>
+    <script src="ui.js"></script>

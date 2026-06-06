@@ -1,0 +1,247 @@
+/* =========================
+   GLOBAL ERROR HANDLER
+========================= */
+window.addEventListener("error", (e) => {
+  console.error("JS ERROR:", e.message);
+});
+
+/* =========================
+   CLOUDINARY CONFIG
+========================= */
+const CLOUD_NAME = "du6e7pzwg";
+const UPLOAD_PRESET = "product_image";
+
+/* =========================
+   SUPABASE INIT
+========================= */
+const supabaseClient = window.supabase?.createClient(
+  "https://dxbhhisexvakxolhmqld.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR4YmhoaXNleHZha3hvbGhtcWxkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODA0Nzk3MDgsImV4cCI6MjA5NjA1NTcwOH0.t1iim-IYnJTNGD1V_hBU6aPEoucmG9TcRU4iCs-yhAU"
+);
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function syncCart() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+/* =========================
+   CLOUDINARY UPLOAD SYSTEM
+========================= */
+async function uploadImages(files) {
+  const urls = [];
+
+  if (!files || files.length === 0) return [];
+
+  for (const file of files) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok || !data.secure_url) {
+      throw new Error(data.error?.message || "Upload failed");
+    }
+
+    urls.push(data.secure_url);
+  }
+
+  return urls;
+}
+
+/* =========================
+   PRODUCT UPLOAD FORM
+========================= */
+function initProductUpload() {
+  const form = document.getElementById("product-form");
+  if (!form) return;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    try {
+      const name = document.getElementById("name").value;
+      const price = Number(document.getElementById("price").value);
+      const badge = document.getElementById("badge").value;
+      const files = document.getElementById("image").files;
+
+      const imageUrls = await uploadImages(files);
+
+      const { error } = await supabaseClient
+        .from("products")
+        .insert([
+          {
+            name,
+            price,
+            badge,
+            images: imageUrls,
+          },
+        ]);
+
+      if (error) throw error;
+
+      alert("Upload successful");
+      form.reset();
+
+      loadProducts(); // refresh after upload
+
+    } catch (err) {
+      console.error(err);
+      alert(err.message);
+    }
+  });
+}
+
+/* =========================
+   LOAD + RENDER PRODUCTS
+========================= */
+async function loadProducts() {
+  if (!supabaseClient) return;
+
+  const { data, error } = await supabaseClient
+    .from("products")
+    .select("*")
+    .order("id", { ascending: false });
+
+  if (error) {
+    console.error(error);
+    return;
+  }
+
+  renderProducts(data);
+}
+
+function renderProducts(products) {
+  const container = document.getElementById("products");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  products.forEach(product => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    card.innerHTML = `
+      <img src="${product.images?.[0] || ''}" />
+      <h3>${product.name}</h3>
+      <p>$${product.price}</p>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
+/* =========================
+   INIT
+========================= */
+document.addEventListener("DOMContentLoaded", () => {
+  initProductUpload();
+  loadProducts();
+
+  initMobileMenu();
+  initCartDrawer();   // 🔥 ADD THIS
+  updateCartCount();  // 🔥 ADD THIS
+});
+
+/* =========================
+   MOBILE MENU
+========================= */
+function initMobileMenu() {
+  const burger = document.getElementById("burger");
+  const menu = document.getElementById("mobile-menu");
+  const closeBtn = document.getElementById("close-menu");
+
+  if (!burger || !menu || !closeBtn) return;
+
+  burger.addEventListener("click", () => {
+    menu.classList.add("open");
+  });
+
+  closeBtn.addEventListener("click", () => {
+    menu.classList.remove("open");
+  });
+
+  // optional: close when clicking outside menu content
+  menu.addEventListener("click", (e) => {
+    if (e.target === menu) {
+      menu.classList.remove("open");
+    }
+  });
+}
+/* =========================
+   CART
+========================= */
+function initCartDrawer() {
+  const cartBtn = document.getElementById("cart-btn");
+  const drawer = document.getElementById("cart-drawer");
+  const closeBtn = document.getElementById("close-cart");
+
+  if (!cartBtn || !drawer || !closeBtn) return;
+
+  cartBtn.addEventListener("click", () => {
+    drawer.classList.add("open");
+    renderCart(); // refresh every time open
+  });
+
+  closeBtn.addEventListener("click", () => {
+    drawer.classList.remove("open");
+  });
+}
+
+function renderCart() {
+  const container = document.getElementById("cart-items");
+  const totalEl = document.getElementById("cart-total");
+
+  if (!container || !totalEl) return;
+
+  container.innerHTML = "";
+
+  // EMPTY CART STATE
+  if (cart.length === 0) {
+    container.innerHTML = "<p>Your cart is empty</p>";
+    totalEl.textContent = "$0";
+    return;
+  }
+
+  let total = 0;
+
+  cart.forEach(item => {
+    total += item.price * item.quantity;
+
+    const div = document.createElement("div");
+
+    div.innerHTML = `
+      <div class="cart-item">
+        <img src="${item.image}" class="cart-img" />
+
+        <div class="cart-info">
+          <p>${item.name}</p>
+          <p>Size: ${item.size || "-"}</p>
+
+          <div class="qty-controls">
+            <button onclick="changeQty(${item.id}, -1)">−</button>
+            <span>${item.quantity}</span>
+            <button onclick="changeQty(${item.id}, 1)">+</button>
+          </div>
+
+          <p>$${item.price * item.quantity}</p>
+
+          <button onclick="removeItem(${item.id})">Remove</button>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(div);
+  });
+
+  totalEl.textContent = `$${total}`;
+}
