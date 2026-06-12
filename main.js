@@ -552,3 +552,27 @@ banner.addEventListener("mouseleave", () => {
   bg.style.transform = "scale(1.1)";
   text.style.transform = "translate(0,0)";
 });
+
+const testimonials = document.querySelectorAll(".testimonial");
+let index = 0;
+
+const showTestimonial = (i) => {
+  testimonials.forEach(t => t.classList.remove("active"));
+  testimonials[i].classList.add("active");
+};
+
+document.getElementById("next").addEventListener("click", () => {
+  index = (index + 1) % testimonials.length;
+  showTestimonial(index);
+});
+
+document.getElementById("prev").addEventListener("click", () => {
+  index = (index - 1 + testimonials.length) % testimonials.length;
+  showTestimonial(index);
+});
+
+// autoplay (this is what actually makes it feel “premium”)
+setInterval(() => {
+  index = (index + 1) % testimonials.length;
+  showTestimonial(index);
+}, 6000);
