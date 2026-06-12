@@ -1813,3 +1813,101 @@ body {
     box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
   }
 }
+
+/*REVIEWS*/
+.testimonial-section {
+  padding: 80px 20px;
+  background: radial-gradient(circle at top, #1a1a1a, #0f0f0f);
+  text-align: center;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+}
+
+.title {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  color: #aaa;
+  margin-bottom: 40px;
+}
+
+.testimonial-wrapper {
+  position: relative;
+  min-height: 220px;
+}
+
+.testimonial {
+  display: none;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 30px;
+  border-radius: 16px;
+  transition: 0.4s ease;
+}
+
+.testimonial.active {
+  display: block;
+  animation: fade 0.5s ease;
+}
+
+@keyframes fade {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+.quote {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.person {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.person img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.person h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.person span {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.controls {
+  margin-top: 20px;
+}
+
+.controls button {
+  background: transparent;
+  border: 1px solid #555;
+  color: #fff;
+  font-size: 24px;
+  padding: 5px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.controls button:hover {
+  background: #fff;
+  color: #000;
+}
